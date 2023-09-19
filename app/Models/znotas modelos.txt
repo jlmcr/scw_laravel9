@@ -1,0 +1,96 @@
+MODELOS
+=======
+https://laravel.com/docs/9.x/eloquent#eloquent-model-conventions
+NOMBRE DE TABLAS
+===============
+CLAVES PRIMARIAS
+================
+CLAVES COMPUESTAS
+================
+
+
+
+Nombres de tablas
+================
+Después de mirar el ejemplo anterior, es posible que haya notado que no le dijimos
+ a Eloquent qué tabla de base de datos corresponde a nuestro Flightmodelo. Por
+ convención, el "caso de la serpiente", el nombre plural de la clase se utilizará
+ como nombre de la tabla a menos que se especifique explícitamente otro nombre.
+ Entonces, en este caso, Eloquent asumirá que el Flightmodelo almacena registros
+ en la flightstabla, mientras que un AirTrafficControllermodelo almacenaría registros
+ en una air_traffic_controllerstabla.
+
+Si la tabla de la base de datos correspondiente de su modelo no se ajusta a esta
+convención, puede especificar manualmente el nombre de la tabla del modelo definiendo
+ una tablepropiedad en el modelo:
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Flight extends Model
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'my_flights';
+}
+
+Claves primarias
+================
+Eloquent también supondrá que la tabla de base de datos correspondiente
+de cada modelo tiene una columna de clave principal denominada id. Si es
+necesario, puede definir una $primaryKeypropiedad protegida en su modelo
+para especificar una columna diferente que sirva como clave principal de su modelo:
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Flight extends Model
+{
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'flight_id';
+}
+
+Además, Eloquent asume que la clave principal es un valor entero incremental, lo que significa que Eloquent convertirá automáticamente la clave principal en un número entero. Si desea utilizar una clave principal no incremental o no numérica, debe definir una $incrementingpropiedad pública en su modelo que se establezca en false:
+
+<?php
+
+class Flight extends Model
+{
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+}
+
+Si la clave principal de su modelo no es un número entero, debe definir una $keyTypepropiedad protegida en su modelo. Esta propiedad debe tener un valor de string:
+
+<?php
+
+class Flight extends Model
+{
+    /**
+     * The data type of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+}
+
+Claves primarias "compuestas"
+================
+Eloquent requiere que cada modelo tenga al menos una "ID" de identificación única que pueda servir como su clave principal. Las claves primarias "compuestas" no son compatibles con los modelos Eloquent. Sin embargo, puede agregar índices únicos adicionales de varias columnas a las tablas de su base de datos además de la clave primaria de identificación única de la tabla.

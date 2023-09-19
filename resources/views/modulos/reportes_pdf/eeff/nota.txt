@@ -1,0 +1,6 @@
+no se genera pdfs del balance genral por que no se pudo hacer
+la fila de total activo
+y total pasivo y pt
+
+solucion:
+se puede usar dos tablas y aumentar al final de cada uno el total

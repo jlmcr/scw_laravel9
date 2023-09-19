@@ -1,0 +1,8 @@
+logo
+authentication-card-logo.blade.php
+esta en view vendor jetstream
+
+************************************
+imagen defondo:
+authentication-card.blade.php
+esta en view vendor jetstream

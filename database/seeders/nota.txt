@@ -1,0 +1,8 @@
+CREAR SEEDER
+    php artisan make:seeder EmpresaSeeder
+
+EJECUTAR SEEDER
+    php artisan db:seed --class=EmpresaSeeder
+
+CREAR FACTORY
+    php artisan make:factory ProveedorFactory
